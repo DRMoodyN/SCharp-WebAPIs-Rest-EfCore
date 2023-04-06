@@ -4,7 +4,7 @@
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[csharp]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
     "editor.formatOnSave": true
   }
 }
