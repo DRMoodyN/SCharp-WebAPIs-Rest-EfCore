@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 namespace Models.Contexts
 {
     public class WmsDbContext : DbContext
@@ -11,7 +12,9 @@ namespace Models.Contexts
         {
         }
 
-        public virtual DbSet<RegionEntity> RegionEntity { get; set; }
+        public virtual DbSet<RegionEntity> Region { get; set; }
+        public virtual DbSet<TypePhoneEntity> TypePhone { get; set; }
+        public virtual DbSet<TypeEmailEntity> TypeEmail { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -98,6 +101,118 @@ namespace Models.Contexts
                     .HasColumnOrder(9)
                     .HasDefaultValueSql("(1)");
             });
+
+            modelBuilder.Entity<TypePhoneEntity>(phone =>
+            {
+                phone.ToTable("TypePhone", "Person");
+
+                phone.HasKey(h => h.TypePhoneID);
+
+                phone.Property(p => p.TypePhoneID)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("TypePhoneID")
+                    .HasColumnType("INT")
+                    .HasColumnOrder(0)
+                    .IsRequired(true)
+                    .IsUnicode(true);
+
+                phone.Property(p => p.TypePhoneName)
+                    .HasColumnName("TypePhoneName")
+                    .HasColumnType("NVARCHAR(20)")
+                    .HasMaxLength(20)
+                    .IsRequired(true)
+                    .IsUnicode(true)
+                    .HasColumnOrder(1);
+
+                phone.Property(p => p.UserCreate)
+                    .HasColumnName("UserCreate")
+                    .HasColumnType("NVARCHAR(50)")
+                    .IsRequired(true)
+                    .HasColumnOrder(5);
+
+                phone.Property(p => p.UserModify)
+                    .HasColumnName("UserModify")
+                    .HasColumnType("NVARCHAR(50)")
+                    .IsRequired(true)
+                    .HasColumnOrder(6);
+
+                phone.Property(p => p.DateCreate)
+                    .HasColumnName("DateCreate")
+                    .HasColumnType("DATE")
+                    .IsRequired(true)
+                    .HasColumnOrder(7)
+                    .HasDefaultValueSql("GETDATE()");
+
+                phone.Property(p => p.DateModify)
+                    .HasColumnName("DateModify")
+                    .HasColumnType("DATE")
+                    .IsRequired(true)
+                    .HasColumnOrder(8)
+                    .HasDefaultValueSql("GETDATE()");
+
+                phone.Property(p => p.IsActive)
+                    .HasColumnName("IsActive")
+                    .IsRequired(true)
+                    .HasColumnOrder(9)
+                    .HasDefaultValueSql("(1)");
+            });
+
+
+            modelBuilder.Entity<TypeEmailEntity>(email =>
+                {
+                    email.ToTable("TypeEmail", "Person");
+
+                    email.HasKey(h => h.TypeEmailID);
+
+                    email.Property(p => p.TypeEmailID)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("TypeEmailID")
+                        .HasColumnType("INT")
+                        .HasColumnOrder(0)
+                        .IsRequired(true)
+                        .IsUnicode(true);
+
+                    email.Property(p => p.TypeEmailName)
+                        .HasColumnName("TypeTypeEmailName")
+                        .HasColumnType("NVARCHAR(20)")
+                        .HasMaxLength(20)
+                        .IsRequired(true)
+                        .IsUnicode(true)
+                        .HasColumnOrder(1);
+
+                    email.Property(p => p.UserCreate)
+                        .HasColumnName("UserCreate")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(5);
+
+                    email.Property(p => p.UserModify)
+                        .HasColumnName("UserModify")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(6);
+
+                    email.Property(p => p.DateCreate)
+                        .HasColumnName("DateCreate")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    email.Property(p => p.DateModify)
+                        .HasColumnName("DateModify")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(8)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    email.Property(p => p.IsActive)
+                        .HasColumnName("IsActive")
+                        .IsRequired(true)
+                        .HasColumnOrder(9)
+                        .HasDefaultValueSql("(1)");
+                });
+
         }
     }
 }
