@@ -1,6 +1,6 @@
 using System;
 
-namespace Models.Entities.Person
+namespace Models
 {
     public class TypeEmailEntity
     {

@@ -1,6 +1,4 @@
-using System;
-
-namespace Models.Entities.Person
+namespace Models
 {
     public class TypePersonEntity
     {
@@ -18,6 +16,8 @@ namespace Models.Entities.Person
         {
             Person = new List<PersonEntity>();
         }
+
+        [JsonIgnore]
         public ICollection<PersonEntity> Person { get; set; }
     }
 }

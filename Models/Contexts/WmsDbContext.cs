@@ -1,7 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-namespace Models.Contexts
+namespace Models
 {
-    public class WmsDbContext : DbContext
+    public class WmsDbContext : IdentityDbContext<User>
     {
         public WmsDbContext()
         {
@@ -29,6 +28,9 @@ namespace Models.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.Entity<RegionEntity>(region =>
             {
                 region.ToTable("Region", "Person");
@@ -357,6 +359,8 @@ namespace Models.Contexts
                     .HasForeignKey(h => h.TypePersonID)
                     .IsRequired(true);
                 });
+
+            modelBuilder.ApplyConfiguration(new RolConfiguration());
         }
     }
 }
