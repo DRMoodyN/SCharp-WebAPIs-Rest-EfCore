@@ -14,17 +14,13 @@ namespace WebAppHosting.Controllers
         public async Task<IActionResult> Create([FromBody] TypePersonEntity model)
         {
             if (model == null)
-            {
                 return StatusCode(StatusCodes.Status400BadRequest, "El Objecto es incorrrecto");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return UnprocessableEntity(ModelState);
-            }
 
             var result = await _service.TypePersonLogic.AddAsync(model);
-            return StatusCode(200, result);
+            return StatusCode(201, result);
         }
 
         [HttpGet]
@@ -32,6 +28,26 @@ namespace WebAppHosting.Controllers
         {
             var result = await _service.TypePersonLogic.GetList();
             return StatusCode(200, result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _service.TypePersonLogic.DeleteLogic(id);
+            return StatusCode(200, result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] TypePersonEntity model)
+        {
+            if (model == null)
+                return StatusCode(StatusCodes.Status400BadRequest, "El Objecto es incorrrecto");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            var result = await _service.TypePersonLogic.Update(id, model);
+            return StatusCode(201, result);
         }
     }
 }
