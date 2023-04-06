@@ -12,9 +12,12 @@ namespace Models.Contexts
         {
         }
 
+        // Person
         public virtual DbSet<RegionEntity> Region { get; set; }
         public virtual DbSet<TypePhoneEntity> TypePhone { get; set; }
         public virtual DbSet<TypeEmailEntity> TypeEmail { get; set; }
+        public virtual DbSet<TypePersonEntity> TypePerson { get; set; }
+        public virtual DbSet<PersonEntity> Person { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -173,7 +176,7 @@ namespace Models.Contexts
                         .IsUnicode(true);
 
                     email.Property(p => p.TypeEmailName)
-                        .HasColumnName("TypeTypeEmailName")
+                        .HasColumnName("TypeEmailName")
                         .HasColumnType("NVARCHAR(20)")
                         .HasMaxLength(20)
                         .IsRequired(true)
@@ -213,6 +216,147 @@ namespace Models.Contexts
                         .HasDefaultValueSql("(1)");
                 });
 
+            modelBuilder.Entity<TypePersonEntity>(person =>
+                {
+                    person.ToTable("TypePerson", "Person");
+
+                    person.HasKey(h => h.TypePersonID);
+
+                    person.Property(p => p.TypePersonID)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("TypePersonID")
+                        .HasColumnType("INT")
+                        .HasColumnOrder(0)
+                        .IsRequired(true)
+                        .IsUnicode(true);
+
+                    person.Property(p => p.TypePersonName)
+                        .HasColumnName("TypePersonName")
+                        .HasColumnType("NVARCHAR(20)")
+                        .HasMaxLength(20)
+                        .IsRequired(true)
+                        .IsUnicode(true)
+                        .HasColumnOrder(1);
+
+                    person.Property(p => p.UserCreate)
+                        .HasColumnName("UserCreate")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(5);
+
+                    person.Property(p => p.UserModify)
+                        .HasColumnName("UserModify")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(6);
+
+                    person.Property(p => p.DateCreate)
+                        .HasColumnName("DateCreate")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    person.Property(p => p.DateModify)
+                        .HasColumnName("DateModify")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(8)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    person.Property(p => p.IsActive)
+                        .HasColumnName("IsActive")
+                        .IsRequired(true)
+                        .HasColumnOrder(9)
+                        .HasDefaultValueSql("(1)");
+                });
+
+            modelBuilder.Entity<PersonEntity>(person =>
+                {
+                    person.ToTable("Person", "Person");
+
+                    person.HasKey(h => h.PersonID);
+
+                    person.Property(p => p.PersonID)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("PersonID")
+                        .HasColumnType("INT")
+                        .HasColumnOrder(0)
+                        .IsRequired(true)
+                        .IsUnicode(true);
+
+                    person.Property(p => p.Information)
+                        .HasColumnName("Information")
+                        .HasColumnType("NVARCHAR(20)")
+                        .HasMaxLength(20)
+                        .IsRequired(true)
+                        .IsUnicode(true)
+                        .HasColumnOrder(1);
+
+                    person.Property(p => p.FirstName1)
+                        .HasColumnName("FirstName1")
+                        .HasColumnType("NVARCHAR(50)")
+                        .HasMaxLength(50)
+                        .IsRequired(true)
+                        .HasColumnOrder(2);
+
+                    person.Property(p => p.FirstName2)
+                       .HasColumnName("FirstName2")
+                       .HasColumnType("NVARCHAR(50)")
+                       .HasMaxLength(50)
+                       .HasColumnOrder(3);
+
+                    person.Property(p => p.LastName1)
+                       .HasColumnName("LastName1")
+                       .HasColumnType("NVARCHAR(50)")
+                       .HasMaxLength(50)
+                       .IsRequired(true)
+                       .HasColumnOrder(4);
+
+                    person.Property(p => p.LastName2)
+                       .HasColumnName("LastName2")
+                       .HasColumnType("NVARCHAR(50)")
+                       .HasMaxLength(50)
+                       .HasColumnOrder(5);
+
+                    person.Property(p => p.UserCreate)
+                        .HasColumnName("UserCreate")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(6);
+
+                    person.Property(p => p.UserModify)
+                        .HasColumnName("UserModify")
+                        .HasColumnType("NVARCHAR(50)")
+                        .IsRequired(true)
+                        .HasColumnOrder(7);
+
+                    person.Property(p => p.DateCreate)
+                        .HasColumnName("DateCreate")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(8)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    person.Property(p => p.DateModify)
+                        .HasColumnName("DateModify")
+                        .HasColumnType("DATE")
+                        .IsRequired(true)
+                        .HasColumnOrder(9)
+                        .HasDefaultValueSql("GETDATE()");
+
+                    person.Property(p => p.IsActive)
+                        .HasColumnName("IsActive")
+                        .IsRequired(true)
+                        .HasColumnOrder(10)
+                        .HasDefaultValueSql("(1)");
+
+                    person
+                    .HasOne(h => h.TypePersonEntity)
+                    .WithMany(w => w.Person)
+                    .HasForeignKey(h => h.TypePersonID)
+                    .IsRequired(true);
+                });
         }
     }
 }
