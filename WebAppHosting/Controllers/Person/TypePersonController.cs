@@ -30,14 +30,14 @@ namespace WebAppHosting.Controllers
             return StatusCode(200, result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.TypePersonLogic.DeleteLogic(id);
             return StatusCode(200, result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Update(int id, [FromBody] TypePersonEntity model)
         {
             if (model == null)

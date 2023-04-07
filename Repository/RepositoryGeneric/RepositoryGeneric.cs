@@ -11,14 +11,21 @@ namespace Repository.RepositoryGeneric
             _dbSet = context.Set<T>();
         }
 
-        public async Task<Object> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            return await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity);
+            return entity;
+        }
+
+        public async Task<T> GetIdAsync(Expression<Func<T, bool>> predicate = null!)
+        {
+            return await _dbSet.Where(predicate).FirstAsync();
         }
 
         public async Task<bool> AnyPropertyAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.AnyAsync(predicate);
+            bool result = await _dbSet.AnyAsync(predicate);
+            return result;
         }
 
         public async Task<List<T>> GetAllAsync<K>(

@@ -1,0 +1,11 @@
+{
+  "firstName": "David Rafael",
+  "lastName": "Moody Nuñez",
+  "userName": "DMoody",
+  "password": "DMoody2023#*Hacker",
+  "email": "drmoodyn@gmail.com",
+  "phoneNumber": "76610944",
+  "role": [
+    "Administrator"
+  ]
+}

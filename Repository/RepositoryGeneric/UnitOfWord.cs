@@ -31,16 +31,9 @@ namespace Repository.RepositoryGeneric
         public IRepositoryGeneric<TypePhoneEntity> TypePhone
         => _typePhone ??= new RepositoryGeneric<TypePhoneEntity>(_context);
 
-        public void Dispose()
-        {
-            _context.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
-            await _context.DisposeAsync();
         }
     }
 }

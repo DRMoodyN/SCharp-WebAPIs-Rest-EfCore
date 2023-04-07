@@ -6,7 +6,7 @@ namespace WebAppHosting.Configurations.Extensions
         {
             services.AddDbContext<WmsDbContext>(x =>
             {
-                x.UseSqlServer(configuration.GetConnectionString("ConnectionSql"));
+                x.UseSqlServer(configuration.GetConnectionString("ConnectionScharpWms"));
             });
         }
 
@@ -47,6 +47,17 @@ namespace WebAppHosting.Configurations.Extensions
                     .AllowAnyHeader();
                 });
             });
+        }
+
+        public static void ConfigureDTO(this IServiceCollection services)
+        {
+            var mapperConfigure = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapperInitial());
+            });
+
+            IMapper mapper = mapperConfigure.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }

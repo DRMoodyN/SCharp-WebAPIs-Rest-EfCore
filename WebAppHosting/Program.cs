@@ -10,6 +10,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureRepository();
 builder.Services.ConfigureService();
+builder.Services.ConfigureDTO();
+
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJwt(builder.Configuration);
 
 builder.Services.ConfigureSql(builder.Configuration);
 
@@ -27,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureExceptionHandler();
+// app.ConfigureExceptionHandler();
 app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
@@ -43,8 +48,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

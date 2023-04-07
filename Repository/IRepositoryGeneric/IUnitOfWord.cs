@@ -1,6 +1,6 @@
 namespace Repository.IRepositoryGeneric
 {
-    public interface IUnitOfWord : IDisposable
+    public interface IUnitOfWord
     {
         IRepositoryGeneric<PersonEntity> Person { get; }
         IRepositoryGeneric<RegionEntity> Region { get; }
