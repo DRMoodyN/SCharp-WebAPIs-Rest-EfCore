@@ -1,8 +1,6 @@
 namespace WebAppHosting.Controllers.Authentication
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class Authentication : ControllerBase
+    public sealed class Authentication : ApiBaseController
     {
         private readonly IServiceManager _service;
         private readonly IMapper _mapper;

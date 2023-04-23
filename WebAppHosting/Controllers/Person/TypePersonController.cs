@@ -1,8 +1,6 @@
 namespace WebAppHosting.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TypePersonController : ControllerBase
+    public class TypePersonController : ApiBaseController
     {
         private IServiceManager _service;
         public TypePersonController(IServiceManager service)
