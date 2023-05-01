@@ -10,7 +10,6 @@ global using Services;
 global using Microsoft.AspNetCore.HttpOverrides;
 global using Microsoft.OpenApi.Models;
 global using Microsoft.AspNetCore.Mvc;
-global using Commons.Models;
 global using Microsoft.AspNetCore.Identity;
 global using AutoMapper;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

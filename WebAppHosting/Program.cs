@@ -1,22 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureCors();
+builder.Services.ConfigureSql(builder.Configuration);
 builder.Services.ConfigureIISIntegration();
-
 builder.Services.AddControllers();
+builder.Services.ConfigureCors();
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen();
-
 builder.Services.ConfigureRepository();
 builder.Services.ConfigureService();
 builder.Services.ConfigureDTO();
-
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJwt(builder.Configuration);
-
-builder.Services.ConfigureSql(builder.Configuration);
+builder.Services.AddSwaggerGen();
 
 // Cambiar codigo de 400 a 422 con la validacion del ModelState
 builder.Services.Configure<ApiBehaviorOptions>(opts =>
