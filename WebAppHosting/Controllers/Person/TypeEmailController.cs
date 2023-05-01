@@ -12,7 +12,7 @@ namespace WebAppHosting.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TypeEmailDTO email)
         {
-            if (email == null)
+            if (email is null)
                 return StatusCode(StatusCodes.Status400BadRequest, "El Objecto es incorrrecto");
 
             if (!ModelState.IsValid)
@@ -24,10 +24,32 @@ namespace WebAppHosting.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromBody] string email)
+        public async Task<IActionResult> GetAll()
         {
             var result = await _service.TypeEmailLogic.GetList();
             return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _service.TypeEmailLogic.DeleteLogic(id, GetUserNameSeccion());
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Create(int id, [FromBody] TypeEmailDTO email)
+        {
+            if (email is null)
+                return StatusCode(StatusCodes.Status400BadRequest, "El Objecto es incorrrecto");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            var result = await _service.TypeEmailLogic.Update(id, email, GetUserNameSeccion());
+            return StatusCode(StatusCodes.Status201Created, result);
         }
     }
 }
