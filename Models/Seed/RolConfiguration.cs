@@ -1,4 +1,4 @@
-namespace Commons.Segurity
+namespace Models
 {
     public class RolConfiguration : IEntityTypeConfiguration<IdentityRole>
     {

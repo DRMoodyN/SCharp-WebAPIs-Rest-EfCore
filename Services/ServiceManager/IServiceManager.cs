@@ -2,11 +2,8 @@ namespace Services
 {
     public interface IServiceManager
     {
-
         // Person
-        ITypePersonLogic TypePersonLogic { get; }
-        ITypeEmailLogic TypeEmailLogic { get; }
-
+        IPersonLogic PersonLogic { get; }
         IAuthenticationLogic AuthenticationLogic { get; }
     }
 }

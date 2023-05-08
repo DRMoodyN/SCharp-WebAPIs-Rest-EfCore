@@ -1,6 +1,5 @@
 global using Models;
 global using Repository.IRepositoryGeneric;
-global using Commons.Models;
 global using Microsoft.AspNetCore.Identity;
 global using AutoMapper;
 global using System.ComponentModel.DataAnnotations;

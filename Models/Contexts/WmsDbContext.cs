@@ -30,7 +30,6 @@ namespace Models
         {
             base.OnModelCreating(modelBuilder);
 
-
             modelBuilder.Entity<RegionEntity>(region =>
             {
                 region.ToTable("Region", "Person");
@@ -42,7 +41,6 @@ namespace Models
                     .HasColumnName("RegionID")
                     .HasColumnType("INT")
                     .IsRequired(true)
-                    .IsUnicode(true)
                     .HasColumnOrder(0);
 
                 region.Property(p => p.Code)
@@ -50,7 +48,6 @@ namespace Models
                     .HasColumnType("NVARCHAR(3)")
                     .IsRequired(true)
                     .HasMaxLength(3)
-                    .IsUnicode(true)
                     .HasColumnOrder(1);
 
                 region.Property(p => p.RegionName)
@@ -58,7 +55,6 @@ namespace Models
                     .HasColumnType("NVARCHAR(50)")
                     .IsRequired(true)
                     .HasMaxLength(50)
-                    .IsUnicode(true)
                     .HasColumnOrder(2);
 
                 region.Property(p => p.RegionSubID)
@@ -118,16 +114,15 @@ namespace Models
                     .HasColumnName("TypePhoneID")
                     .HasColumnType("INT")
                     .HasColumnOrder(0)
-                    .IsRequired(true)
-                    .IsUnicode(true);
+                    .IsRequired(true);
 
                 phone.Property(p => p.TypePhoneName)
                     .HasColumnName("TypePhoneName")
                     .HasColumnType("NVARCHAR(20)")
                     .HasMaxLength(20)
                     .IsRequired(true)
-                    .IsUnicode(true)
                     .HasColumnOrder(1);
+
 
                 phone.Property(p => p.UserCreate)
                     .HasColumnName("UserCreate")
@@ -162,7 +157,6 @@ namespace Models
                     .HasDefaultValueSql("(1)");
             });
 
-
             modelBuilder.Entity<TypeEmailEntity>(email =>
                 {
                     email.ToTable("TypeEmail", "Person");
@@ -174,16 +168,16 @@ namespace Models
                         .HasColumnName("TypeEmailID")
                         .HasColumnType("INT")
                         .HasColumnOrder(0)
-                        .IsRequired(true)
-                        .IsUnicode(true);
+                        .IsRequired(true);
 
                     email.Property(p => p.TypeEmailName)
                         .HasColumnName("TypeEmailName")
                         .HasColumnType("NVARCHAR(20)")
                         .HasMaxLength(20)
                         .IsRequired(true)
-                        .IsUnicode(true)
                         .HasColumnOrder(1);
+
+
 
                     email.Property(p => p.UserCreate)
                         .HasColumnName("UserCreate")
@@ -229,15 +223,13 @@ namespace Models
                         .HasColumnName("TypePersonID")
                         .HasColumnType("INT")
                         .HasColumnOrder(0)
-                        .IsRequired(true)
-                        .IsUnicode(true);
+                        .IsRequired(true);
 
                     person.Property(p => p.TypePersonName)
                         .HasColumnName("TypePersonName")
                         .HasColumnType("NVARCHAR(20)")
                         .HasMaxLength(20)
                         .IsRequired(true)
-                        .IsUnicode(true)
                         .HasColumnOrder(1);
 
                     person.Property(p => p.UserCreate)
@@ -284,15 +276,13 @@ namespace Models
                         .HasColumnName("PersonID")
                         .HasColumnType("INT")
                         .HasColumnOrder(0)
-                        .IsRequired(true)
-                        .IsUnicode(true);
+                        .IsRequired(true);
 
                     person.Property(p => p.Information)
                         .HasColumnName("Information")
                         .HasColumnType("NVARCHAR(20)")
                         .HasMaxLength(20)
                         .IsRequired(true)
-                        .IsUnicode(true)
                         .HasColumnOrder(1);
 
                     person.Property(p => p.FirstName1)

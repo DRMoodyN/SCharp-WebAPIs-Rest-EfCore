@@ -1,4 +1,4 @@
-namespace Commons.Models
+namespace Models
 {
     public class Login
     {
